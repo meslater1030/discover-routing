@@ -20,10 +20,27 @@ The [History](https://github.com/ReactTraining/history/blob/9ff690785f02d5c2554b
 
 The [Ember-Routing](https://github.com/emberjs/ember.js/blob/ae70bd2e18ad777d2070059acd11b80b3f6d7409/packages/ember-routing/lib/location/history_location.js) module also makes use of `history.pushState`. In fact - much of this code is fundamentally the same as what we just saw. pushState is called on line 143 and the `popstate` event handler is found on line 235. This class also checks for compatibility and has other niceties related to routing.
 
-## Angular
+### Angular
 
 By now you know what to expect. Angular implements `history.pushState` on line 58 and listens to the `popstate` event on line 43.
 
 Naturally there are some compatibility concerns. This methodology is only available to modern browsers that implement the HTML5 spec. For previous browsers you might see a path that looks something like `host:domain/#/some/url`. Older browsers are able to programmatically change and listen to hash changes. In the past this functionality existed in order to move the user up and down one page by element id. That purpose was overriden in early SPA's to enable routing like we're used to seeing today.
 
 More functionality exists in the HTML5 history spec than `history.pushState` and the `popstate` event but even from these examples you can see that the technical matter of changing urls and rendering content could be considered relatively trivial. What's difficult in SPA routing is deciding how exactly to respond to a change in url and subsequently communicate that information across the rest of the app.
+
+## Things to think about
+
+1. Right now, every element on the page is removed before any new route is rendered. Is this how we want to transition between routes?
+2. How should we provide information such as hashes and query params to the rendered content?
+3. What might the implementation of a routable component look like?
+4. What sort of public api would other developers expect to see in your router?
+5. If you don't elect to remove and re-render every page on every transition, how would you handle giving new information to previously rendered content?
+6. How would you implement a 404?
+7. How would you implement nested routes?
+8. Do you think there's any use for the natively provided state on transition?
+9. How do you plan on handling dynamic routes? For instance - `user/${userId}/profile`
+10. How might your design change for these kinds of projects?
+    * The app makes extensive use of query params
+    * The app has very few routes
+    * The app has very many routes
+    * The users of the app are split evenly between mobile and desktop

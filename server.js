@@ -4,7 +4,7 @@ const port = 3000
 
 const indexFile = fs.readFileSync('index.html', 'utf8');
 
-const jsFile = fs.readFileSync('index.js', 'utf8');
+let jsFile = fs.readFileSync('index.js', 'utf8');
 
 const requestHandler = (request, response) => {
   console.log(request.url)
@@ -22,4 +22,8 @@ server.listen(port, (err) => {
   }
 
   console.log(`server is listening on ${port}`)
-})
+});
+
+fs.watch('index.js', { encoding: 'buffer' }, (eventType, filename) => {
+  jsFile = fs.readFileSync('index.js', 'utf8');
+});
