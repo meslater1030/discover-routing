@@ -1,5 +1,5 @@
 function changeRoutes(routeName) {
-  history.pushState({ arbitraryState: true }, '', routeName);
+  history.pushState({}, '', routeName);
   window.dispatchEvent(new Event('popstate'));
 }
 
@@ -20,10 +20,6 @@ function renderCats() {
 }
 
 function renderHome() {
-  const header = createElement('h1', {
-    innerText: 'Hello World!',
-  })
-  document.body.appendChild(header);
   const button = createElement('button', {
     innerText: 'go to cats',
     onclick: () => changeRoutes('/cats'),

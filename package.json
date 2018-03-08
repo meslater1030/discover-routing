@@ -1,0 +1,12 @@
+{
+  "name": "discover-routing",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "http": "0.0.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
